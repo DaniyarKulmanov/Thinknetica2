@@ -1,11 +1,11 @@
-def koeff (x,name)
+def koeff (name)
   puts "Введите коэфцент #{name}"
-  x = gets.chomp.to_f
+  gets.chomp.to_f
 end
 
-a = koeff(a, "A")
-b = koeff(b, "B")
-c = koeff(c, "C")
+a = koeff('A')
+b = koeff('B')
+c = koeff('C')
 
 d = b**2 - 4 * a * c
 

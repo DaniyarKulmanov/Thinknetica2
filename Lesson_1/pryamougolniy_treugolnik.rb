@@ -1,13 +1,13 @@
 puts "Все значения должны быть числовыми!"
 
-def storona (x,name)
+def storona (name)
   puts "Введите сторону #{name}"
-  x = gets.chomp.to_f
+  gets.chomp.to_f
 end
 
-a = storona(a, "A")
-b = storona(b, "B")
-c = storona(c, "C")
+a = storona('A')
+b = storona('B')
+c = storona('C')
 
 if a > b && a > c
   puts "Треугольник приямоугольный" if a**2 == b**2 + c**2
