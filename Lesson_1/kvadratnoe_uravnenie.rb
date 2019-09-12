@@ -8,9 +8,10 @@ b = koeff('B')
 c = koeff('C')
 
 d = b**2 - 4 * a * c
-sqrt = Math.sqrt(d)
+
 
 if d > 0
+  sqrt = Math.sqrt(d)
   x1 = (-b + sqrt) / 2 * a
   x2 = (-b - sqrt) / 2 * a
   puts "Корень 1 = #{x1}, корень 2 = #{x2}"
