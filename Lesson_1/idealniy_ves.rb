@@ -1,16 +1,15 @@
 puts "Все значения должны быть числовыми!"
-puts "Введите Ваш вес:"
-
-ves = Integer(gets.chomp)
+puts "Введите Ваше имя:"
+name = gets.chomp.to_s
 
 puts "Введите Ваш рост:"
 
-rost = Integer(gets.chomp)
+height = Integer(gets.chomp)
 
-best_ves = rost - 110
+best_weight = height - 110
 
-if best_ves >= 0
-  puts "Ваш идеальный вес = #{best_ves}"
+if best_weight >= 0
+  puts "#{name} Ваш идеальный вес = #{best_weight}"
 else
-  puts "Ваш вес оптимален"
+  puts "#{name} Ваш вес оптимален"
 end
