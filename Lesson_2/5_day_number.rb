@@ -13,8 +13,6 @@ if year != 2000 && ((year % 4).zero? && year % 100 != 0 || (year % 400).zero?)
   months[1] += 1
 end
 
-for i in 1...month
-  current_day += months[i]
-end
+(1...month).each{ |i| current_day += months[i] }
 
-puts "Текущая порядковый номер дня = #{current_day}"
+puts "Текущий порядковый номер дня = #{current_day}"
