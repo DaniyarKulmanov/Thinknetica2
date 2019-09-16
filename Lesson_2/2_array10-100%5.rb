@@ -1,10 +1,3 @@
-count = 0
-array = []
+print (5..100).step(5).to_a
 
-while count < 100
-  count += 5
-  array << count
-end
-
-print array
 
