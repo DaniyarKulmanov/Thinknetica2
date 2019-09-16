@@ -1,8 +1,10 @@
-fibonacci = []
-fibonacci[0] = 0
-fibonacci[1] = 1
+fibonacci = [0, 1]
 
-fibonacci << fibonacci[-1] + fibonacci[-2] while fibonacci[-1] < 89
+def count(arr)
+  arr[-1] + arr[-2]
+end
+
+fibonacci << count(fibonacci) while count(fibonacci) < 100
 
 print fibonacci
 
