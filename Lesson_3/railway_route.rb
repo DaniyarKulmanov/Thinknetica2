@@ -13,7 +13,7 @@ class Route
     @stations.insert(1, station)
    end
 
-  def remove_station(station)
+  def remove_station
     puts "No middle stations to delete" if @stations.size == 2
     @stations.delete_at(1) if @stations.size > 2
   end
