@@ -16,7 +16,7 @@ class Station
 
   def trains_by_type
     @trains.sort
-    @trains.each { |train| puts train.class.to_s}
+    @trains.each { |train| puts train.type }
   end
 
   def departure(train)
