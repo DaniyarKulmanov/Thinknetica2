@@ -45,11 +45,11 @@ class Train
   end
 
   private
-
+  #требуется для считывания позиции в массиве для метода Travel
   def current_position
     @route.stations.find_index { |station| station.trains.include?(self) }
   end
-
+  #движение позда, проихсодит из метода Travel
   def move_train(new_position)
     if nil_or_negative? new_position
       puts 'First or Last station reached'
@@ -59,7 +59,7 @@ class Train
       @route.stations[new_position].arrival(self)
     end
   end
-
+  #установка станций после перемещения поезда, автоматически
   def stations(set)
     @next_station = nil
     @previous_station = nil
@@ -69,12 +69,12 @@ class Train
     @current_station = @route.stations[set].name
     @next_station = @route.stations[nextt].name unless nil_or_negative? nextt
   end
-
+  #проверка условий скорости и вагонов
   def conditions_check
     puts 'First stop train' if speed != 0
     puts 'No wagons to remove' if @wagons.zero?
   end
-
+  #проверка значения есть в массиве такой индекс или отрицательное число
   def nil_or_negative?(number)
     @route.stations[number].nil? || number.negative?
   end
