@@ -16,7 +16,26 @@ def create_train(trains)
 end
 
 def list_trains(trains)
-  trains.each_with_index { |train, index| puts "#{index + 1}. Поезд №#{train.id}" }
+  trains.each_with_index do |train, index|
+    type = 'пассажирский' if train.class == PassengerTrain
+    type = 'грузовой' if train.class == CargoTrain
+    puts "#{index + 1}. Поезд №#{train.id}, тип #{type}, вагонов #{train.wagons.size}"
+  end
+end
+
+def move_trains(trains, direction)
+  puts 'Выберите поезд из списка поездов:'
+  list_trains(trains)
+  puts 'Введите номер поезда для выполнения операции, пример 1'
+  index = gets.chomp.to_i
+  index -= 1
+  if trains[index].nil?
+    puts "Выберите поезд из диапозона 0 - #{trains.size}"
+  elsif trains[index].route.nil?
+    puts 'Не присвоен маршрут'
+  else
+    trains[index].travel(direction)
+  end
 end
 
 def trains_management(trains)
@@ -31,12 +50,14 @@ def trains_management(trains)
          '0. Назад'
     input = gets.chomp.to_i
     case input
-      when 1 then create_train(trains)
-      when 2 then list_trains(trains)
-      when 3 then wagons_management(trains, 'add')
-      when 4 then wagons_management(trains, 'remove')
-      when 5 then list_stations(stations)
-      when 6 then list_stations(stations)
+    when 1 then create_train(trains)
+    when 2 then list_trains(trains)
+    when 3 then wagons_management(trains, 'add')
+    when 4 then wagons_management(trains, 'remove')
+    when 5 then move_trains(trains, 'forward')
+    when 6 then move_trains(trains, 'back')
+    else
+      puts 'Введите цифру от 0 до 6'
     end
     break if input.zero?
   end

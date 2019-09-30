@@ -19,9 +19,13 @@ def wagons_management(trains, operation)
   puts 'Введите номер поезда для добавления/удаления вагона, пример 1'
   index = gets.chomp.to_i
   true_index = index - 1
-  create_wagon(trains[true_index]) if operation == 'add'
-  remove_wagon(trains[true_index]) if operation == 'remove'
-  puts "Поезд имеет #{trains[true_index].wagons.size} вагонов"
+  if trains[true_index].nil?
+    puts "Выберите поезд из диапозона 0 - #{trains.size}"
+  else
+    create_wagon(trains[true_index]) if operation == 'add'
+    remove_wagon(trains[true_index]) if operation == 'remove'
+    puts "Поезд имеет #{trains[true_index].wagons.size} вагонов"
+  end
 end
 
 
