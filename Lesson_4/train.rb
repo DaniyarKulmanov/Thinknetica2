@@ -16,14 +16,14 @@ class Train
     @speed = 0
   end
 
-  def attach_wagon
+  def attach_wagon(wagon)
     conditions_check
-    @wagons += 1 if speed.zero?
+    @wagons << wagon if speed.zero?
   end
 
-  def remove_wagon
+  def remove_wagon(wagon)
     conditions_check
-    @wagons -= 1 if speed.zero?
+    @wagons.delete(wagon) if speed.zero?
   end
 
   def add_route(route)
@@ -42,6 +42,14 @@ class Train
       end
       move_train index
     end
+  end
+
+  proteced
+
+  #проверка условий скорости, в каждом типе позда свой тип проверки
+  def conditions_check
+    puts 'First stop train' if speed != 0
+    puts 'No wagons to remove' if @wagons.zero?
   end
 
   private
@@ -69,11 +77,7 @@ class Train
     @current_station = @route.stations[set].name
     @next_station = @route.stations[nextt].name unless nil_or_negative? nextt
   end
-  #проверка условий скорости и вагонов
-  def conditions_check
-    puts 'First stop train' if speed != 0
-    puts 'No wagons to remove' if @wagons.zero?
-  end
+
   #проверка значения есть в массиве такой индекс или отрицательное число
   def nil_or_negative?(number)
     @route.stations[number].nil? || number.negative?
