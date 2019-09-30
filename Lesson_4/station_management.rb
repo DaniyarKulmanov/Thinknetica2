@@ -10,6 +10,14 @@ def create_station(stations)
     break
   end
 end
+
+def list_stations(stations)
+  stations.each do |station|
+    puts "Станция #{station.name}, поезда на станции:"
+    station.trains.each { |train| puts "Поезд № #{train.id}" }
+  end
+end
+
 def station_management(stations)
   loop do
     puts 'Что Вы хотите сделать?',
@@ -19,7 +27,7 @@ def station_management(stations)
     input = gets.chomp.to_i
     case input
     when 1 then create_station(stations)
-    when 2 then stations.each { |station| puts "Станция = #{station.name}" }
+    when 2 then list_stations(stations)
     end
     break if input.zero?
   end
