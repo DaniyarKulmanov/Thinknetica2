@@ -1,7 +1,7 @@
 require '../Lesson_3/railway_station'
 require '../Lesson_3/railway_route'
 
-class Train
+class RailwayTrain
   attr_reader :speed, :wagons, :route
   attr_reader :previous_station, :current_station, :next_station
 

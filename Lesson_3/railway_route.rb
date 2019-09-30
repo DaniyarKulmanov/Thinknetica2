@@ -1,6 +1,6 @@
 require '../Lesson_3/railway_station'
 
-class Route
+class RailwayRoute
   attr_reader :stations
 
   def initialize(first_station, last_station)
