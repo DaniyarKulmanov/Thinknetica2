@@ -1,6 +1,11 @@
 require '../Lesson_4/wagon'
 
 class CargoWagon < Wagon
-  #грузоподёмность
-  #крытый или открытый
+  attr_reader :capacity, :roof
+
+  def initialize(capacity, roof = true)
+    super(9, 7)
+    @capacity = capacity
+    @roof = roof
+  end
 end

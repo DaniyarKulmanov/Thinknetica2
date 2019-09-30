@@ -8,10 +8,6 @@ class Train
     @speed = 0
   end
 
-  def accelerate
-    @speed += 10
-  end
-
   def stop
     @speed = 0
   end
@@ -46,13 +42,19 @@ class Train
 
   proteced
 
-  #проверка условий скорости, в каждом типе позда свой тип проверки
+  # у каждого типа поезда свои ограничения по макс. скорости
+  def accelerate
+    @speed += 10
+  end
+
+  private
+
+  # проверка скорости поезда и вагонов
   def conditions_check
     puts 'First stop train' if speed != 0
     puts 'No wagons to remove' if @wagons.zero?
   end
 
-  private
   #требуется для считывания позиции в массиве для метода Travel
   def current_position
     @route.stations.find_index { |station| station.trains.include?(self) }
