@@ -1,5 +1,5 @@
 class Train
-  attr_reader :speed, :wagons, :route
+  attr_reader :speed, :wagons, :route, :id
   attr_reader :previous_station, :current_station, :next_station
 
   def initialize(id)
@@ -52,7 +52,6 @@ class Train
   # проверка скорости поезда и вагонов
   def conditions_check
     puts 'First stop train' if speed != 0
-    puts 'No wagons to remove' if @wagons.zero?
   end
 
   #требуется для считывания позиции в массиве для метода Travel
