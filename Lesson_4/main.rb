@@ -1,4 +1,5 @@
 require_relative 'include'
+stations = []
 
 loop do
   puts 'Выберите пункт меню:',
@@ -9,7 +10,7 @@ loop do
   input = gets.chomp.to_i
   case input
   when 1
-    station_management
+    station_management(stations)
   when 2
     trains
   when 3
