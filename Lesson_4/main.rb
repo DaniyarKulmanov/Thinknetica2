@@ -1,8 +1,23 @@
-require '../Lesson_4/wagon'
-require '../Lesson_4/passenger_wagon'
+require_relative 'include'
 
-p_wagon = PassengerWagon.new(10, 2)
-puts p_wagon.length
-puts p_wagon.height
-puts p_wagon.seats
-puts p_wagon.type
+loop do
+  puts 'Выберите пункт меню:',
+       '1. Станции',
+       '2. Позда',
+       '3. Маршруты',
+       '0. Выход'
+  input = gets.chomp.to_i
+  case input
+  when 1
+    station_management
+  when 2
+    trains
+  when 3
+    routes
+  else
+    puts 'Введите цифровое значение'
+    break if input.zero?
+  end
+end
+
+puts 'До свидания!'

@@ -40,7 +40,7 @@ class Train
     end
   end
 
-  proteced
+  protected
 
   # у каждого типа поезда свои ограничения по макс. скорости
   def accelerate

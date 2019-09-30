@@ -1,0 +1,7 @@
+require '../Lesson_4/wagon'
+require '../Lesson_4/passenger_wagon'
+require '../Lesson_4/cargo_wagon'
+require '../Lesson_4/train'
+require '../Lesson_4/passenger_train'
+require '../Lesson_4/cargo_train'
+require '../Lesson_4/station_management'

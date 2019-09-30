@@ -1,5 +1,5 @@
 require '../Lesson_4/train'
-require 'Lesson_4/passenger_wagon'
+require '../Lesson_4/passenger_wagon'
 
 class PassengerTrain < Train
   MAX_SPEED = 100
