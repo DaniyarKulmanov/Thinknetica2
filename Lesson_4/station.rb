@@ -9,7 +9,7 @@ class Station
   end
 
   def arrival(train)
-    puts "Trains #{train} arrived to #{@name}"
+    puts "Поезд #{train.id} прибыл на станицию #{@name}"
     @trains << train
   end
 
@@ -19,7 +19,7 @@ class Station
   end
 
   def departure(train)
-    puts "Train #{train} departed from #{@name}"
+    puts "Поезд #{train.id} выехал со станции #{@name}"
     @trains.delete(train)
   end
 end

@@ -14,7 +14,7 @@ class Route
   end
 
   def remove_station
-    puts "No middle stations to delete" if @stations.size == 2
+    puts "Отсутствуют промежуточные станции" if @stations.size == 2
     @stations.delete_at(1) if @stations.size > 2
   end
 end

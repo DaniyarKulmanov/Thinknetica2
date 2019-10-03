@@ -10,7 +10,7 @@ loop do
   when 1
     station_management(stations)
   when 2
-    trains_management(trains)
+    trains_management(trains, routes)
   when 3
     route_management(routes, stations)
   else

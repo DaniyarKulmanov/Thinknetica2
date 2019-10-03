@@ -17,6 +17,7 @@ def wagons_management(trains, operation)
   puts 'Выберите поезд из списка поездов:'
   list_trains(trains)
   puts 'Введите номер поезда для добавления/удаления вагона, пример 1'
+  puts '*по умолчанию будет выбран 1 поезд'
   index = gets.chomp.to_i
   true_index = index - 1
   if trains[true_index].nil?
