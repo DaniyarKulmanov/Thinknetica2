@@ -1,6 +1,7 @@
 require_relative 'include'
 stations = []
 trains = []
+routes = []
 
 loop do
   main_menu
@@ -11,7 +12,7 @@ loop do
   when 2
     trains_management(trains)
   when 3
-    routes
+    route_management(routes, stations)
   else
     break if input.zero?
   end

@@ -30,7 +30,7 @@ def move_trains(trains, direction)
   index = gets.chomp.to_i
   index -= 1
   if trains[index].nil?
-    puts "Выберите поезд из диапозона 0 - #{trains.size}"
+    puts "Выберите поезд из диапозона 1 - #{trains.size}"
   elsif trains[index].route.nil?
     puts 'Не присвоен маршрут'
   else

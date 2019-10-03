@@ -12,8 +12,8 @@ def create_station(stations)
 end
 
 def list_stations(stations)
-  stations.each do |station|
-    puts "Станция #{station.name}, поезда на станции:"
+  stations.each_with_index  do |station, index|
+    puts "#{index + 1}. станция #{station.name}, поезда на станции:"
     station.trains.each { |train| puts "Поезд № #{train.id}" }
   end
 end
