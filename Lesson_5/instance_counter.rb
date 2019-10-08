@@ -5,17 +5,14 @@ module InstanceCounter
   end
 
   module ClassMethods
-    attr_accessor :counter
-    def instances
-      @counter
-    end
+    attr_accessor :instances
   end
 
   module InstanceMethods
     private
     def register_instance
-      self.class.counter = 0 if self.class.counter.nil?
-      self.class.counter += 1
+      self.class.instances ||= 0
+      self.class.instances += 1
     end
   end
 end
