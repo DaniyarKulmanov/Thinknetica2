@@ -2,10 +2,10 @@ require_relative 'manufacturer'
 require_relative 'instance_counter'
 
 class Train
-  @@trains = []
+  @@trains = {}
 
   def self.find(search)
-    @@trains.detect { |train| train.id == search }
+    @@trains[search.to_sym]
   end
 
   include Manufacturer
@@ -18,7 +18,7 @@ class Train
     @id = id
     @wagons = []
     @speed = 0
-    @@trains << self
+    @@trains[id.to_sym] = self
     register_instance
   end
 
