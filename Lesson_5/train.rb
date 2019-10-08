@@ -1,9 +1,13 @@
+require_relative 'manufacturer'
+
 class Train
   @@trains = []
 
   def self.find(search)
     @@trains.detect { |train| train.id == search }
   end
+
+  include Manufacturer
 
   attr_reader :speed, :wagons, :route, :id
   attr_reader :previous_station, :current_station, :next_station
