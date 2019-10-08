@@ -2,6 +2,9 @@ require_relative 'manufacturer'
 require_relative 'instance_counter'
 
 class Train
+
+  PROPERID = /^([а-я]|\d){3}-*([а-я]|\d){2}$/i
+
   @@trains = {}
 
   def self.find(search)
@@ -20,6 +23,7 @@ class Train
     @speed = 0
     @@trains[id.to_sym] = self
     register_instance
+    validate!
   end
 
   def stop
@@ -54,7 +58,19 @@ class Train
     end
   end
 
+  def valid?
+    validate!
+    true
+  rescue
+    false
+  end
+
   protected
+
+  def validate!
+    raise 'Длина номера не больше 5' if @id.gsub('-','').length > 5
+    raise 'Не верный формат ххх-xx, х любое значение, дефис по желанию' if @id !~ PROPERID
+  end
 
   # у каждого типа поезда свои ограничения по макс. скорости
   def accelerate
