@@ -2,8 +2,9 @@ require_relative 'manufacturer'
 require_relative 'instance_counter'
 
 class Train
-
   PROPERID = /^([а-я]|\d){3}-*([а-я]|\d){2}$/i
+  IDLENGTH = 'Длина номера не должна превышать 5 букв'.freeze
+  IDFORMAT = 'Не верный формат, заполните по шаблону: ххх-xx, х любая буква(крилллица) или цифра, дефис по желанию'.freeze
 
   @@trains = {}
 
@@ -14,8 +15,9 @@ class Train
   include Manufacturer
   include InstanceCounter
 
-  attr_reader :speed, :wagons, :route, :id
+  attr_reader :speed, :wagons, :routes
   attr_reader :previous_station, :current_station, :next_station
+  attr_accessor :id
 
   def initialize(id)
     @id = id
@@ -68,8 +70,8 @@ class Train
   protected
 
   def validate!
-    raise 'Длина номера не больше 5' if @id.gsub('-','').length > 5
-    raise 'Не верный формат ххх-xx, х любое значение, дефис по желанию' if @id !~ PROPERID
+    raise IDLENGTH if @id.gsub('-','').length > 5
+    raise IDFORMAT if @id !~ PROPERID
   end
 
   # у каждого типа поезда свои ограничения по макс. скорости
