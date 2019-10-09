@@ -23,9 +23,9 @@ class Train
     @id = id
     @wagons = []
     @speed = 0
+    validate!
     @@trains[id.to_sym] = self
     register_instance
-    validate!
   end
 
   def stop
