@@ -16,5 +16,4 @@ class PassengerWagon < Wagon
     @free_seats -= 1 unless @free_seats.zero?
     @reserved_seats += 1 unless @free_seats < 0
   end
-
 end

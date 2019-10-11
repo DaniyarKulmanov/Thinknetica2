@@ -4,7 +4,7 @@ require_relative 'instance_counter'
 class Train
   PROPERID = /^([а-я]|\d){3}-*([а-я]|\d){2}$/i
   IDLENGTH = 'Длина номера не должна превышать 5 букв'.freeze
-  IDFORMAT = 'Не верный формат, заполните по шаблону: ххх-xx, х любая буква(крилллица) или цифра, дефис по желанию'.freeze
+  IDFORMAT = 'Не верный формат, заполните по шаблону: ххх-xx или ххххх!'.freeze
 
   @@trains = {}
 
@@ -48,13 +48,13 @@ class Train
     stations current_position
   end
 
-  def travel(direction)
+  def travel(direction) # replace case with hash
     if direction != 'forward' && direction != 'back'
       puts 'Please enter forward or back'
     else
       case direction
-        when 'forward'then index = current_position + 1
-        when 'back' then index = current_position - 1
+      when 'forward'then index = current_position + 1
+      when 'back' then index = current_position - 1
       end
       move_train index
     end
@@ -76,27 +76,24 @@ class Train
   protected
 
   def validate!
-    raise IDLENGTH if @id.gsub('-','').length > 5
+    raise IDLENGTH if @id.delete('-').length > 5
     raise IDFORMAT if @id !~ PROPERID
   end
 
-  # у каждого типа поезда свои ограничения по макс. скорости
   def accelerate
     @speed += 10
   end
 
   private
 
-  # проверка скорости поезда и вагонов
   def conditions_check
     puts 'First stop train' if speed != 0
   end
 
-  #требуется для считывания позиции в массиве для метода Travel
   def current_position
     @route.stations.find_index { |station| station.trains.include?(self) }
   end
-  #движение позда, проихсодит из метода Travel
+
   def move_train(new_position)
     if nil_or_negative? new_position
       puts 'First or Last station reached'
@@ -106,18 +103,17 @@ class Train
       @route.stations[new_position].arrival(self)
     end
   end
-  #установка станций после перемещения поезда, автоматически
+
   def stations(set)
     @next_station = nil
     @previous_station = nil
     previous = set - 1
     nextt = set + 1
-    @previous_station = @route.stations[previous].name unless nil_or_negative?previous
+    @previous_station = @route.stations[previous].name unless nil_or_negative? previous
     @current_station = @route.stations[set].name
     @next_station = @route.stations[nextt].name unless nil_or_negative? nextt
   end
 
-  #проверка значения есть в массиве такой индекс или отрицательное число
   def nil_or_negative?(number)
     @route.stations[number].nil? || number.negative?
   end

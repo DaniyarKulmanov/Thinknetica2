@@ -15,7 +15,7 @@ random_cities = %w(Астана Алматы Шымкент Жезказган)
 # random_capacity = [86, 104, 120]
 
 # hypen generation
-hyphen = Proc.new do |x|
+hyphen = proc do |x|
   x = ['-', ''].shuffle
   x[0]
 end
@@ -52,7 +52,9 @@ end
 puts '=====================Станции======================='
 stations.each do |station|
   puts "Станция #{station.name}, поезда на станции:"
-  station.trains.each { |train| puts "поезд № #{train.id}, вагонов #{train.wagons.size}" }
+  station.trains.each do |train|
+    puts "поезд № #{train.id}, вагонов #{train.wagons.size}"
+  end
 end
 
 puts '=====================Поезда======================='
@@ -70,4 +72,3 @@ trains.each do |train|
     end
   end
 end
-

@@ -1,7 +1,6 @@
 require_relative 'instance_counter'
 
 class Station
-
   RUSWPORDS = /^[а-я]/i
 
   @@stations = []
@@ -55,6 +54,4 @@ class Station
     raise 'Название должно состоять из кириллицы' if @name !~ RUSWPORDS
     raise 'Длина названия должна быть не меньшу 3 букв' if @name.length < 3
   end
-
 end
-
