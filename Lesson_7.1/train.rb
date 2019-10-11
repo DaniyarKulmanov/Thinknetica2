@@ -2,22 +2,22 @@ require_relative 'manufacturer'
 require_relative 'instance_counter'
 
 class Train
+  include Manufacturer
+  include InstanceCounter
+
   PROPERID = /^([а-я]|\d){3}-*([а-я]|\d){2}$/i
   IDLENGTH = 'Длина номера не должна превышать 5 букв'.freeze
   IDFORMAT = 'Не верный формат, заполните по шаблону: ххх-xx или ххххх!'.freeze
 
   @@trains = {}
 
-  def self.find(search)
-    @@trains[search.to_sym]
-  end
-
-  include Manufacturer
-  include InstanceCounter
-
   attr_reader :speed, :wagons, :routes
   attr_reader :previous_station, :current_station, :next_station
   attr_accessor :id
+
+  def self.find(search)
+    @@trains[search.to_sym]
+  end
 
   def initialize(id)
     @id = id

@@ -11,8 +11,6 @@ trains = []
 # values for test data
 random_words = (('А'..'Я').to_a + ('а'..'я').to_a + (0..9).to_a).shuffle
 random_cities = %w(Астана Алматы Шымкент Жезказган)
-# random_seats = [18, 21, 24]
-# random_capacity = [86, 104, 120]
 
 # hypen generation
 hyphen = proc do |x|

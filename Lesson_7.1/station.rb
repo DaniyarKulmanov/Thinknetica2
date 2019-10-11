@@ -1,18 +1,18 @@
 require_relative 'instance_counter'
 
 class Station
+  include InstanceCounter
+
   RUSWPORDS = /^[а-я]/i
 
   @@stations = []
 
+  attr_reader :trains
+  attr_accessor :name
+
   def self.all
     @@stations
   end
-
-  include InstanceCounter
-
-  attr_reader :trains
-  attr_accessor :name
 
   def initialize(name)
     @name = name
