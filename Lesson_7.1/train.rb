@@ -110,11 +110,11 @@ class Train
   def stations(set)
     @next_station = nil
     @previous_station = nil
-    previous = set - 1
-    nextt = set + 1
-    @previous_station = @route.stations[previous].name unless nil_or_negative? previous
+    previous = @route.stations[set - 1]
+    following = @route.stations[set + 1]
+    @previous_station = previous unless nil_or_negative?(set - 1)
     @current_station = @route.stations[set].name
-    @next_station = @route.stations[nextt].name unless nil_or_negative? nextt
+    @next_station = following unless nil_or_negative?(set + 1)
   end
 
   def nil_or_negative?(number)
