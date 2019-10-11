@@ -9,14 +9,16 @@ class Train
   IDLENGTH = 'Длина номера не должна превышать 5 букв'.freeze
   IDFORMAT = 'Не верный формат, заполните по шаблону: ххх-xx или ххххх!'.freeze
 
-  @@trains = {}
-
   attr_reader :speed, :wagons, :routes
   attr_reader :previous_station, :current_station, :next_station
   attr_accessor :id
 
-  def self.find(search)
-    @@trains[search.to_sym]
+  class << self
+    attr_accessor :trains
+
+    def find(search)
+      @trains[search.to_sym]
+    end
   end
 
   def initialize(id)
@@ -24,7 +26,8 @@ class Train
     @wagons = []
     @speed = 0
     validate!
-    @@trains[id.to_sym] = self
+    self.class.trains ||= {}
+    self.class.trains[id.to_sym] = self
     register_instance
   end
 

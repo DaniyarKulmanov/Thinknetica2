@@ -10,7 +10,7 @@ trains = []
 
 # values for test data
 random_words = (('А'..'Я').to_a + ('а'..'я').to_a + (0..9).to_a).shuffle
-random_cities = %w(Астана Алматы Шымкент Жезказган)
+random_cities = %w[Астана Алматы Шымкент Жезказган]
 
 # hypen generation
 hyphen = proc do |x|

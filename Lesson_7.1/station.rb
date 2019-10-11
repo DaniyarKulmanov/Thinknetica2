@@ -5,19 +5,18 @@ class Station
 
   RUSWPORDS = /^[а-я]/i
 
-  @@stations = []
-
   attr_reader :trains
   attr_accessor :name
 
-  def self.all
-    @@stations
+  class << self
+    attr_accessor :stations
   end
 
   def initialize(name)
     @name = name
     @trains = []
-    @@stations << self
+    self.class.stations ||= []
+    self.class.stations << self
     register_instance
     validate!
   end
