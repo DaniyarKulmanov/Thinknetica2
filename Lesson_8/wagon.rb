@@ -1,6 +1,8 @@
 require_relative 'manufacturer'
+require_relative 'accessors'
 
 class Wagon
+  extend Accessors
   include Manufacturer
 
   attr_reader :length, :height

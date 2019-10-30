@@ -1,7 +1,9 @@
 require_relative 'manufacturer'
 require_relative 'instance_counter'
+require_relative 'accessors'
 
 class Train
+  extend Accessors
   include Manufacturer
   include InstanceCounter
 

@@ -1,8 +1,8 @@
 require_relative 'wagon'
 
 class PassengerWagon < Wagon
-  attr_reader :free_seats, :type, :reserved_seats
-  attr_accessor :wifi
+  attr_reader  :type
+  attr_accessor_with_history :free_seats, :wifi, :reserved_seats
 
   def initialize(seats, type, wifi = true)
     super(8, 2.5)

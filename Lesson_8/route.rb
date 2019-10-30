@@ -1,6 +1,8 @@
 require_relative 'instance_counter'
+require_relative 'accessors'
 
 class Route
+  extend Accessors
   include InstanceCounter
 
   attr_reader :stations, :first_station, :last_station

@@ -1,6 +1,8 @@
 require_relative 'instance_counter'
+require_relative 'accessors'
 
 class Station
+  extend Accessors
   include InstanceCounter
 
   RUSWPORDS = /^[а-я]/i
