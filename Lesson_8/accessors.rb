@@ -21,9 +21,28 @@ module Accessors
       end
     end
   end
+
+  def strong_accessor(*names)
+    type = names.last || {}
+    names.each do |name|
+      var = "@#{name}".to_sym
+      define_method("#{name}") { instance_variable_get(var) }
+
+      define_method("#{name}=") do |value|
+        if value.class.to_s != type[:class]
+          message = "Invalid value type, should be #{type[:class]}"
+          raise TypeError, message
+        else
+          instance_variable_set(var, value)
+        end
+      end
+    end
+  end
 end
 
 class Example
   extend Accessors
   attr_accessor_with_history :m, :bo, :cc
+  strong_accessor :name, class: 'String'
+  strong_accessor :number, class: 'Integer'
 end

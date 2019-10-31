@@ -11,9 +11,10 @@ class Train
   IDLENGTH = 'Длина номера не должна превышать 5 букв'.freeze
   IDFORMAT = 'Не верный формат, заполните по шаблону: ххх-xx или ххххх!'.freeze
 
-  attr_reader :speed, :wagons, :routes
+  attr_reader :wagons, :route
   attr_reader :previous_station, :current_station, :next_station
   attr_accessor :id
+  strong_accessor :speed, class: 'Integer'
 
   class << self
     attr_accessor :trains
@@ -81,6 +82,7 @@ class Train
   protected
 
   def validate!
+#BUG
     raise IDLENGTH if @id.delete('-').length > 5
     raise IDFORMAT if @id !~ PROPERID
   end

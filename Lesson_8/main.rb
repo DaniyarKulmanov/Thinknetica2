@@ -46,7 +46,7 @@ wagons[1].reserve_capacity rand(99)
   trains[i].attach_wagon wagons[i]
 end
 
-# test data print
+# demonstration print
 puts '=====================Станции======================='
 stations.each do |station|
   puts "Станция #{station.name}, поезда на станции:"

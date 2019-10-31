@@ -5,7 +5,8 @@ class Wagon
   extend Accessors
   include Manufacturer
 
-  attr_reader :length, :height
+  strong_accessor :length, class: 'Integer'
+  strong_accessor :height, class: 'Integer'
 
   def initialize(length, height)
     @length = length
