@@ -13,17 +13,12 @@ class Wagon
   strong_accessor :wagon_length, class: 'Integer'
   strong_accessor :wagon_height, class: 'Integer'
 
+  validate :wagon_length, :length, 10, LENGTH_RULE
+  validate :wagon_height, :length, 3, HEIGHT_RULE
+
   def initialize(length, height)
     @wagon_length = length
     @wagon_height = height
-    attributes_check
-  end
-
-  protected
-
-  def attributes_check
-    self.class.validate :wagon_length, :length, 10, LENGTH_RULE
-    self.class.validate :wagon_height, :length, 3, HEIGHT_RULE
     validate!
   end
 end

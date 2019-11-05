@@ -18,6 +18,9 @@ class Train
 
   strong_accessor :speed, class: 'Integer'
 
+  validate :id, :length, 5
+  validate :id, :format, PROPERID, ID_RULE
+
   class << self
     attr_accessor :trains
 
@@ -30,7 +33,7 @@ class Train
     @id = id
     @wagons = []
     @speed = 0
-    attributes_check
+    validate!
     self.class.trains ||= {}
     self.class.trains[id.to_sym] = self
     register_instance
@@ -75,12 +78,6 @@ class Train
   end
 
   protected
-
-  def attributes_check
-    self.class.validate :id, :length, 5
-    self.class.validate :id, :format, PROPERID, ID_RULE
-    validate!
-  end
 
   def accelerate
     @speed += 10

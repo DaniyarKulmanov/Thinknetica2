@@ -18,13 +18,16 @@ class Station
     attr_accessor :stations
   end
 
+  validate :name, :format, RUSWPORDS, NAME_RULE
+  validate :name, :length, 5, LENGTH_RULE
+
   def initialize(name)
     @name = name
     @trains = []
+    validate!
     self.class.stations ||= []
     self.class.stations << self
     register_instance
-    attributes_check
   end
 
   def arrival(train)
@@ -44,13 +47,5 @@ class Station
     trains.each do |train|
       yield(train)
     end
-  end
-
-  protected
-
-  def attributes_check
-    self.class.validate :name, :format, RUSWPORDS, NAME_RULE
-    self.class.validate :name, :length, 5, LENGTH_RULE
-    validate!
   end
 end

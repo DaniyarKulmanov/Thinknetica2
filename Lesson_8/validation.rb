@@ -7,10 +7,12 @@ module Validation
   module ClassMethods
     attr_reader :validations
 
-    def validate(name, type, options = nil, message = nil)
-      @validations ||= {}
-      @validations[name] ||= []
-      @validations[name] << { type: type, options: options, alert: message }
+    def validate(variable, type, options = nil, message = nil)
+      # @validations ||= {}
+      # @validations[name] ||= []
+      # @validations[name] << { type: type, options: options, alert: message }
+      @validations ||= []
+      @validations << { name: variable, type: type, options: options, alert: message }
     end
   end
 
@@ -23,11 +25,9 @@ module Validation
     end
 
     def validate!
-      self.class.validations.each do |variable, validations|
-        value = instance_variable_get("@#{variable}")
-        validations.each do |validation|
-          send("validate_#{validation[:type]}", value, validation[:options], validation[:alert])
-        end
+      self.class.validations.each do |check|
+        value = instance_variable_get("@#{check[:name]}")
+        send("validate_#{check[:type]}", value, check[:options], check[:alert])
       end
     end
 
