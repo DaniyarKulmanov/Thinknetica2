@@ -13,10 +13,11 @@ module Accessors
       end
 
       define_method("#{name}=".to_sym) do |value|
-        old = send("#{name}_history")
-        old.push value
+        history = send("#{name}_history")
+        old_value = instance_variable_get(var)
+        history.push old_value unless old_value.nil?
         instance_variable_set(var, value)
-        instance_variable_set(changelog, old)
+        instance_variable_set(changelog, history)
       end
     end
   end
