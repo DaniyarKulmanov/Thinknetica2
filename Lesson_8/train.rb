@@ -10,12 +10,12 @@ class Train
   include Validation
 
   PROPERID = /^([а-я]|\d){3}-*([а-я]|\d){2}$/i
-  IDLENGTH = 'Длина номера не должна превышать 5 букв'.freeze
-  IDFORMAT = 'Не верный формат, заполните по шаблону: ххх-xx или ххххх!'.freeze
+  ID_RULE = 'ID ошибка, кириллица и цифры (xxx-xx), дефис не обязателен'.freeze
 
   attr_reader :wagons, :route
   attr_reader :previous_station, :current_station, :next_station
   attr_accessor :id
+
   strong_accessor :speed, class: 'Integer'
 
   class << self
@@ -30,7 +30,7 @@ class Train
     @id = id
     @wagons = []
     @speed = 0
-    validate!
+    attributes_check
     self.class.trains ||= {}
     self.class.trains[id.to_sym] = self
     register_instance
@@ -74,20 +74,13 @@ class Train
     end
   end
 
-  # def valid?
-  #   validate!
-  #   true
-  # rescue
-  #   false
-  # end
-
   protected
 
-  # def validate!
-# #BUG
-#     raise IDLENGTH if @id.delete('-').length > 5
-#     raise IDFORMAT if @id !~ PROPERID
-#   end
+  def attributes_check
+    validate :id, :length, 5
+    validate :id, :format, PROPERID, ID_RULE
+    validate!
+  end
 
   def accelerate
     @speed += 10

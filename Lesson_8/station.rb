@@ -1,11 +1,15 @@
 require_relative 'instance_counter'
 require_relative 'accessors'
+require_relative 'validation'
 
 class Station
   extend Accessors
   include InstanceCounter
+  include Validation
 
   RUSWPORDS = /^[а-я]/i
+  NAME_RULE = 'Название должно состоять из кириллицы'.freeze
+  LENGTH_RULE = 'Длина названия должна быть не больше'.freeze
 
   attr_reader :trains
   attr_accessor :name
@@ -20,7 +24,7 @@ class Station
     self.class.stations ||= []
     self.class.stations << self
     register_instance
-    validate!
+    attributes_check
   end
 
   def arrival(train)
@@ -42,17 +46,11 @@ class Station
     end
   end
 
-  def valid?
-    validate!
-    true
-  rescue
-    false
-  end
-
   protected
 
-  def validate!
-    raise 'Название должно состоять из кириллицы' if @name !~ RUSWPORDS
-    raise 'Длина названия должна быть не меньшу 3 букв' if @name.length < 3
+  def attributes_check
+    validate :name, :format, RUSWPORDS, NAME_RULE
+    validate :name, :length, 5, LENGTH_RULE
+    validate!
   end
 end

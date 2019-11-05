@@ -1,20 +1,10 @@
 module Validation
   attr_reader :validations
 
-  def validate(name, type, *options)
+  def validate(name, type, options = nil, message = nil)
     @validations ||= {}
     @validations[name] ||= []
-    @validations[name] << { type: type, options: options }
-  end
-
-  def validate!
-    @validations.each do |variable, validations|
-      value = instance_variable_get("@#{variable}")
-      validations.each do |validation|
-        send(validation[:type], value, validation[:options])
-        puts validation[:options]
-      end
-    end
+    @validations[name] << { type: type, options: options, alert: message }
   end
 
   def valid?
@@ -24,37 +14,35 @@ module Validation
     false
   end
 
+  def validate!
+    @validations.each do |variable, validations|
+      value = instance_variable_get("@#{variable}")
+      validations.each do |validation|
+        send(validation[:type], value, validation[:options], validation[:alert])
+      end
+    end
+  end
+
 private
 
-  def presence(value, _options = nil)
-    raise 'Value empty' if value.nil? || value.to_s.strip.empty?
+  def presence(value, _options = nil, alert = nil)
+    error_message = alert.nil? ? 'Value empty' : alert
+    raise error_message if value.nil? || value.to_s.strip.empty?
   end
 
-  def format(value, option)
-    puts option
-    raise 'Invalid format' if option.class != Regexp || value !~ option
+  def format(value, option, alert = nil)
+    error_message = alert.nil? ? 'Invalid format' : alert
+    raise error_message if option.class != Regexp || value !~ option
   end
 
-  def type(value, option)
-    raise 'Invalid type' if value.class == option
-  end
-end
-
-class Example
-  include Validation
-
-  FORMAT = /^([а-я]|\d){3}-*([а-я]|\d){2}$/i
-
-  attr_accessor :name
-
-  def initialize(name)
-    @name = name
+  def type(value, option, alert = nil)
+    error_message = alert.nil? ? 'Invalid type' : alert
+    raise error_message if value.class == option
   end
 
-  def check
-    validate :name, :presence
-    validate :name, :format, FORMAT
-    validate :name, :type, String
-    validate!
+  def length(value, option, alert = nil)
+    error_message = alert.nil? ? 'Invalid length =' : alert
+    variable = value.class != Integer ? value.delete('-').length : value
+    raise "#{error_message} #{option}" if variable > option
   end
 end

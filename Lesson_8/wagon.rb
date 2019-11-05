@@ -1,30 +1,29 @@
 require_relative 'manufacturer'
 require_relative 'accessors'
+require_relative 'validation'
 
 class Wagon
   extend Accessors
   include Manufacturer
+  include Validation
 
-  strong_accessor :length, class: 'Integer'
-  strong_accessor :height, class: 'Integer'
+  LENGTH_RULE = 'Длинна не должна превышать ='.freeze
+  HEIGHT_RULE = 'Высота не должна превышать ='.freeze
+
+  strong_accessor :wagon_length, class: 'Integer'
+  strong_accessor :wagon_height, class: 'Integer'
 
   def initialize(length, height)
-    @length = length
-    @height = height
-    validate!
-  end
-
-  def valid?
-    validate!
-    true
-  rescue
-    false
+    @wagon_length = length
+    @wagon_height = height
+    attributes_check
   end
 
   protected
 
-  def validate!
-    raise 'Длинна не должна превышать 10 метров' if length > 10
-    raise 'Высота не должна превышать 3 метров' if height > 3
+  def attributes_check
+    validate :wagon_length, :length, 10, LENGTH_RULE
+    validate :wagon_height, :length, 3, HEIGHT_RULE
+    validate!
   end
 end
