@@ -49,8 +49,8 @@ class Station
   protected
 
   def attributes_check
-    validate :name, :format, RUSWPORDS, NAME_RULE
-    validate :name, :length, 5, LENGTH_RULE
+    self.class.validate :name, :format, RUSWPORDS, NAME_RULE
+    self.class.validate :name, :length, 5, LENGTH_RULE
     validate!
   end
 end

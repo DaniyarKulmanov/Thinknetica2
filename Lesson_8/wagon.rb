@@ -22,8 +22,8 @@ class Wagon
   protected
 
   def attributes_check
-    validate :wagon_length, :length, 10, LENGTH_RULE
-    validate :wagon_height, :length, 3, HEIGHT_RULE
+    self.class.validate :wagon_length, :length, 10, LENGTH_RULE
+    self.class.validate :wagon_height, :length, 3, HEIGHT_RULE
     validate!
   end
 end

@@ -28,8 +28,8 @@ class Route
   private
 
   def attributes_check
-    validate :first_station, :presence
-    validate :last_station, :presence
+    self.class.validate :first_station, :presence
+    self.class.validate :last_station, :presence
     validate!
   end
 end

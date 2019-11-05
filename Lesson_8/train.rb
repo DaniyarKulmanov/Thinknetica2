@@ -77,8 +77,8 @@ class Train
   protected
 
   def attributes_check
-    validate :id, :length, 5
-    validate :id, :format, PROPERID, ID_RULE
+    self.class.validate :id, :length, 5
+    self.class.validate :id, :format, PROPERID, ID_RULE
     validate!
   end
 
