@@ -14,7 +14,6 @@ module Accessors
 
       define_method("#{name}=".to_sym) do |value|
         old = send("#{name}_history")
-        old.push instance_variable_get(var) if instance_variable_get(changelog).nil?
         old.push value
         instance_variable_set(var, value)
         instance_variable_set(changelog, old)
