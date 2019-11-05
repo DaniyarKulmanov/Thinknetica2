@@ -39,10 +39,3 @@ module Accessors
     end
   end
 end
-
-class Example
-  extend Accessors
-  attr_accessor_with_history :m, :bo, :cc
-  strong_accessor :name, class: 'String'
-  strong_accessor :number, class: 'Integer'
-end

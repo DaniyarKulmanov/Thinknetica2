@@ -1,11 +1,13 @@
 require_relative 'manufacturer'
 require_relative 'instance_counter'
 require_relative 'accessors'
+require_relative 'validation'
 
 class Train
   extend Accessors
   include Manufacturer
   include InstanceCounter
+  include Validation
 
   PROPERID = /^([а-я]|\d){3}-*([а-я]|\d){2}$/i
   IDLENGTH = 'Длина номера не должна превышать 5 букв'.freeze
@@ -72,20 +74,20 @@ class Train
     end
   end
 
-  def valid?
-    validate!
-    true
-  rescue
-    false
-  end
+  # def valid?
+  #   validate!
+  #   true
+  # rescue
+  #   false
+  # end
 
   protected
 
-  def validate!
-#BUG
-    raise IDLENGTH if @id.delete('-').length > 5
-    raise IDFORMAT if @id !~ PROPERID
-  end
+  # def validate!
+# #BUG
+#     raise IDLENGTH if @id.delete('-').length > 5
+#     raise IDFORMAT if @id !~ PROPERID
+#   end
 
   def accelerate
     @speed += 10
